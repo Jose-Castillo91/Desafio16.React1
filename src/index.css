@@ -1,5 +1,10 @@
+html,
 body {
-  height: 100vh;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 .fondoPizza {
   position: relative;
@@ -85,7 +90,30 @@ body {
 }
 
 .containerFooterPrincipal {
-  position: absolute;
-  bottom: 0;
+  position: static;
   width: 100%;
 }
+
+.AppContainer {
+  display: "flex";
+flex-direction: column;
+min-height: 100vh;
+
+}
+
+.formulario{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 1em 1em 1em;
+}
+.formulario label{
+font-size: large;
+}
+.formulario input{
+  width: 25em;
+  height: 3em;
+}
+
+
