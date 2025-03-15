@@ -1,31 +1,37 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { pizzas } from "../assets/pizzas";
+import { useState } from "react";
 
-function CardPizza({ name, price, ingredientes, img }) {
+function CardPizza() {
+  const [datos] = useState(pizzas);
+
   return (
-    <div className="containerPrincipalCard">
-      <Card style={{ width: "30rem" }}>
-        <Card.Img variant="top" src={img} />
+    <div className="containerCardsHome">
+      {datos.map((pizza) => (
+        <Card key={pizza.id} style={{ width: "30rem" }}>
+          <Card.Img variant="top" src={pizza.img} />
 
-        <Card.Body>
-          <div className="containerSegundarioCard">
-            <Card.Title>{name}</Card.Title>
-            <div>
-              <Card.Text>
-                Ingredientes: <br /> {ingredientes}
-                <br />
-                <div className="precioCardPizza"> Precio: {price}</div>
-              </Card.Text>
+          <Card.Body>
+            <div className="containerSegundarioCard">
+              <Card.Title>{pizza.name}</Card.Title>
+              <div>
+                <Card.Text>
+                  Ingredientes: <br /> {pizza.ingredients.join(", ")}
+                  <br />
+                  <div className="precioCardPizza"> Precio: ${pizza.price}</div>
+                </Card.Text>
+              </div>
+              <div className="contenedorBotonesCard">
+                <Button className="BotonesBootstrapCards" variant="primary">
+                  Ver Más👀
+                </Button>
+                <Button variant="primary">Añadir 🛒</Button>
+              </div>
             </div>
-            <div className="contenedorBotonesCard">
-              <Button className="BotonesBootstrapCards" variant="primary">
-                Ver Más👀
-              </Button>
-              <Button variant="primary">Añadir 🛒</Button>
-            </div>
-          </div>
-        </Card.Body>
-      </Card>
+          </Card.Body>
+        </Card>
+      ))}
     </div>
   );
 }
