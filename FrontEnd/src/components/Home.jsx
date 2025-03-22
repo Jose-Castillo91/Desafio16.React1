@@ -21,7 +21,7 @@ function Home() {
     <div>
       <Header />
       <div className="centradorHome">
-        <CardPizza pizzas={info} />
+        <CardPizza />
       </div>
     </div>
   );
