@@ -1,28 +1,10 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-import { useEffect, useState } from "react";
-
-
-
-function CardPizza() {
-  const [datos, setDatos] = useState([]);
-  
-    useEffect(() => {
-      consultarApi();
-    }, []);
-  
-    const consultarApi = async () => {
-      const url = "http://localhost:5000/api/pizzas";
-      const response = await fetch(url);
-      const data = await response.json();
-      // console.log(data);
-      setDatos(data);
-    };
-
+function CardPizza({ info }) {
   return (
     <div className="containerCardsHome">
-      {datos.map((pizza) => (
+      {info.map((pizza) => (
         <Card key={pizza.id} style={{ width: "30rem", margin: "1rem" }}>
           <Card.Img variant="top" src={pizza.img} />
           <Card.Body>

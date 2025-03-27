@@ -1,5 +1,5 @@
-import Header from "./Header";
-import CardPizza from "./CardPizza";
+import Header from "../components/Header";
+import CardPizza from "../components/CardPizza";
 import { useEffect, useState } from "react";
 
 function Home() {
@@ -21,7 +21,7 @@ function Home() {
     <div>
       <Header />
       <div className="centradorHome">
-        <CardPizza />
+        <CardPizza info={info} />
       </div>
     </div>
   );

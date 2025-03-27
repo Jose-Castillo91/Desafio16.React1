@@ -74,7 +74,7 @@ function Register() {
             className="form-control"
             onChange={(e) => setContrasena(e.target.value)}
             value={contrasena}
-            placeholder="contraseñaMuyDificil"
+            placeholder="Contraseña"
           />
         </div>
         <div className="formulario">
@@ -85,7 +85,7 @@ function Register() {
             className="form-control"
             onChange={(e) => setConfirmacionContrasena(e.target.value)}
             value={confirmacionContrasena}
-            placeholder="contraseñaMuyDificil"
+            placeholder="Contraseña"
           />
         </div>
         <button type="submit" className="btn btn-primary">
