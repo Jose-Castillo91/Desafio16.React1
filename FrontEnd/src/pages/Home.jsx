@@ -1,27 +1,22 @@
 import Header from "../components/Header";
 import CardPizza from "../components/CardPizza";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { PizzaContext } from "../assets/context/PizzaContext";
 
 function Home() {
-  const [info, setInfo] = useState([]);
+  const { pizzas, loading } = useContext(PizzaContext);
 
-  useEffect(() => {
-    consultarApi();
-  }, []);
-
-  const consultarApi = async () => {
-    const url = "http://localhost:5000/api/pizzas";
-    const response = await fetch(url);
-    const data = await response.json();
-    // console.log(data);
-    setInfo(data);
-  };
+ 
+  if (loading) return <p>Cargando pizzas...</p>;
+  
+ 
 
   return (
     <div>
       <Header />
       <div className="centradorHome">
-        <CardPizza info={info} />
+        <CardPizza pizzas={pizzas} />
       </div>
     </div>
   );

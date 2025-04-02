@@ -9,14 +9,18 @@ import Login from "./pages/Login";
 import { Routes, Route } from "react-router";
 import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
+import CartProvider from "./assets/context/CartContext";
+import PizzaProvider from "./assets/context/PizzaContext";
 
 function App() {
   return (
     <>
       <div className="AppContainer">
-        <Custombar />
-        {/* <Profile /> */}
-
+        <CartProvider>
+          <PizzaProvider>
+          <Custombar />
+          {/* <Profile /> */}
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
@@ -27,6 +31,8 @@ function App() {
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />
+        </PizzaProvider>
+        </CartProvider>
       </div>
     </>
   );

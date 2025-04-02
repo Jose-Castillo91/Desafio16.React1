@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { pizzaCart } from "../assets/pizzas";
+import { useContext } from "react";
+import { CartContext } from "../assets/context/CartContext";
 
 const Cart = () => {
-  const [cart, setCart] = useState(pizzaCart);
+  const {cart, setCart} = useContext(CartContext);
 
   const incrementaCantidad = (id) => {
     setCart(
