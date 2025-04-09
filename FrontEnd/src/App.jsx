@@ -11,30 +11,50 @@ import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
 import CartProvider from "./assets/context/CartContext";
 import PizzaProvider from "./assets/context/PizzaContext";
+import UserProvider from "./assets/context/UserContext";
+import RedirectIfAuth from "./components/RedirectIfAuth";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <>
-      <div className="AppContainer">
-        <CartProvider>
-          <PizzaProvider>
+    <UserProvider>
+      <CartProvider>
+        <PizzaProvider>
           <Custombar />
-          {/* <Profile /> */}
-        
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/pizza/p001" element={<Pizza />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
-        <Footer />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/register"
+              element={
+                <RedirectIfAuth>
+                  <Register />
+                </RedirectIfAuth>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <RedirectIfAuth>
+                  <Login />
+                </RedirectIfAuth>
+              }
+            />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/pizza/:id" element={<Pizza />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+          <Footer />
         </PizzaProvider>
-        </CartProvider>
-      </div>
-    </>
+      </CartProvider>
+    </UserProvider>
   );
 }
 

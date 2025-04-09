@@ -3,13 +3,14 @@ import Card from "react-bootstrap/Card";
 import { useContext } from "react";
 import { CartContext } from "../assets/context/CartContext";
 import { pizzas } from "../assets/pizzas";
+import { Link } from "react-router-dom";
 
 function CardPizza({ info }) {
-  const { cart, setCart} = useContext(CartContext)
+  const { cart, setCart } = useContext(CartContext);
 
   const añadirAlCarrito = (producto) => {
     const productoExistente = cart.find((item) => item.id === producto.id);
-  
+
     if (productoExistente) {
       const nuevoCarrito = cart.map((item) =>
         item.id === producto.id ? { ...item, count: item.count + 1 } : item
@@ -19,6 +20,7 @@ function CardPizza({ info }) {
       setCart([...cart, { ...producto, count: 1 }]);
     }
   };
+
   return (
     <div className="containerCardsHome">
       {pizzas.map((pizza) => (
@@ -35,10 +37,17 @@ function CardPizza({ info }) {
                 Precio: ${pizza.price}
               </Card.Text>
               <div className="contenedorBotonesCard">
-                <Button className="BotonesBootstrapCards" variant="primary">
+                <Button
+                  className="BotonesBootstrapCards"
+                  variant="primary"
+                  as={Link}
+                  to={`/pizza/${pizza.id}`}
+                >
                   Ver Más 👀
                 </Button>
-                <Button onClick={() => añadirAlCarrito(pizza)} variant="primary">Añadir 🛒</Button>
+                <Button onClick={() => añadirAlCarrito(pizza)} variant="primary">
+                  Añadir 🛒
+                </Button>
               </div>
             </div>
           </Card.Body>

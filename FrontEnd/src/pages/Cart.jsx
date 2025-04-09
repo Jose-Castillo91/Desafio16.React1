@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { CartContext } from "../assets/context/CartContext";
+import { UserContext } from "../assets/context/UserContext";
 
 const Cart = () => {
-  const {cart, setCart} = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
+  const { token } = useContext(UserContext);
 
   const incrementaCantidad = (id) => {
     setCart(
@@ -17,13 +19,12 @@ const Cart = () => {
       prevCart
         .map((item) =>
           item.id === id
-            ? { ...item, count: item.count - 1 } // Disminuye la cantidad en 1
+            ? { ...item, count: item.count - 1 }
             : item
         )
-        .filter((item) => item.count > 0) // Elimina los que queden en 0
+        .filter((item) => item.count > 0)
     );
   };
-  
 
   const totalPrice = cart.reduce(
     (acc, item) => acc + item.price * item.count,
@@ -52,18 +53,13 @@ const Cart = () => {
                 <p>Cantidad: {item.count}</p>
                 <div className="botones-cart">
                   <button className="botonRestaCantidadCart" onClick={() => disminuyeCantidad(item.id)}>-</button>
-                  <button
-                    className="botonSumaCantidadCart"
-                    onClick={() => incrementaCantidad(item.id)}
-                  >
-                    +
-                  </button>
+                  <button className="botonSumaCantidadCart" onClick={() => incrementaCantidad(item.id)}>+</button>
                 </div>
               </div>
             </div>
           ))}
           <h3>Total: ${totalPrice}</h3>
-          <button>Pagar</button>
+          <button disabled={!token}>Pagar</button>
         </div>
       )}
     </div>
@@ -71,3 +67,4 @@ const Cart = () => {
 };
 
 export default Cart;
+
